@@ -7,7 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-# Prices are in cents
+# Prices are in cents == floating point math isn't precise so in apps with prices use either
+# decimal type or JUST USE CENTS (integers)
+
 product_data = [
   { name: "Waffle Maker", price: '2499' },
   { name: "Stapler", price: '999' },
@@ -22,7 +24,7 @@ product_data = [
 Product.destroy_all if Rails.env.development?
 
 product_data.each do |item|
-  product = Product.new(name: item.name, price: item.price)
+  product = Product.new(name: item[:name], price: item[:price])
   product.save
 end
 
